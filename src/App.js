@@ -5,7 +5,7 @@ import "./App.css";
 
 const App = () => {
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState(googleresult);
+  const [result, setResult] = useState();
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = (event) => {
