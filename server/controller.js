@@ -30,6 +30,7 @@ controller.fetchToApi = (req, res, next)=>{
   fetch(url)
     .then(response => response.json())
     .then(data => {
+      if (!data.ok) throw new Error('WHOIS request failed, please try again later.')
       res.locals.data = data;
       return next();
     })
@@ -38,7 +39,7 @@ controller.fetchToApi = (req, res, next)=>{
         log: "Express error in handling fetch request to WHOIS API",
         status: 502,
         message: {
-          err: `WHOIS request failed, please try again later. `,
+          err: error,
         },
       })
     });
