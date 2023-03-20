@@ -16,15 +16,15 @@ app.get('/whois/:query', controller.validateQuery, controller.fetchToApi, (req, 
   return res.status(200).json(res.locals.data);
 });
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/build/index.html'));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
+    log: "Express error handler caught unknown middleware error",
     status: 500,
-    message: { err: 'An error occurred' },
+    message: { err: "An error occurred" },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(err);

@@ -23,26 +23,25 @@ controller.validateQuery = (req, res, next)=>{
   }
 }
 
-controller.fetchToApi = (req, res, next)=>{
+controller.fetchToApi = (req, res, next) => {
   const { query } = req.params;
   const url = `https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=${API_KEY}&domainName=${query}&ipWhois=1&outputFormat=json&ip=1`;
 
   fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      if (!data.ok) throw new Error('WHOIS request failed, please try again later.')
+    .then((response) => response.json())
+    .then((data) => {
       res.locals.data = data;
       return next();
     })
-    .catch(error => {
+    .catch((error) => {
       next({
         log: "Express error in handling fetch request to WHOIS API",
         status: 502,
         message: {
-          err: error,
+          err: "WHOIS request failed, please try again later.",
         },
-      })
+      });
     });
-}
+};
 
 export default controller;
