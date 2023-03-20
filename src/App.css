@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap");
 
 button {
   cursor: pointer;
@@ -9,9 +9,22 @@ button:hover {
   transition: background-color linear 200ms;
 }
 
+ul {
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+  color: #636060;
+}
+
+li > .property-key-container {
+  color: #268da1;
+}
+
 .App {
   padding: 30px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .form-container {
@@ -27,11 +40,11 @@ button:hover {
   margin: 20px;
 }
 
-.input-container > input[type=text] {
+.input-container > input[type="text"] {
   height: 25px;
   border: unset;
   border-bottom: 1px solid #aaaab6;
-  width: 200px;
+  width: 400px;
 }
 
 .input-container > button {
@@ -70,4 +83,47 @@ button:hover {
   padding: 11px 20px 0 0;
   color: #b52a2a;
   text-align: center;
+}
+
+.data-viewer {
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #fbfbe7;
+}
+
+.section-container {
+  padding: 5px 0;
+}
+
+.section-container > .property-key-container {
+  color: #a1266c;
+}
+
+.section-key-container {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  color: rgb(13, 150, 3);
+}
+
+.section-key-container:hover {
+  text-shadow: #ffe091 1px 1px 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .form-container {
+    padding: 0;
+  }
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-container > input[type="text"] {
+    width: 100%;
+  }
+  .input-container > button {
+    margin: 20px 0;
+    width: 100%;
+  }
 }
