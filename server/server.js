@@ -10,14 +10,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
-app.use(express.static(__dirname + '/../application/build'));
+app.use(express.static(__dirname + '/build'));
 
 app.get('/whois/:query', controller.validateQuery, controller.fetchToApi, (req, res)=>{
   return res.status(200).json(res.locals.data);
 });
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/../application/build/index.html'));
+  res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
 app.use((err, req, res, next) => {
