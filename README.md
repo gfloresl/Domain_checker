@@ -18,8 +18,11 @@ In the terminal install all dependencies
 ### Docker
 
 To run a containerized version of the app, run the following commands in the terminal
+
 `docker build . -t gfloresl/domain_checker`
+
 `docker run -p 49160:3000 -d gfloresl/domain_checker`
+
 then visit localhost:49160
 
 ### Contributing
