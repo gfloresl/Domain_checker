@@ -7,10 +7,10 @@ const { API_KEY } = process.env;
 const controller = {};
 
 controller.validateQuery = (req, res, next) => {
-  const { query } = req.params;
-  const isQueryValidIp = validateIp(query);
-  const isValidUrl = validateUrl(query);
-  if (isQueryValidIp || isValidUrl) {
+  const { domainName } = req.params;
+  const isDomainNameValidIp = validateIp(domainName);
+  const isValidUrl = validateUrl(domainName);
+  if (isDomainNameValidIp || isValidUrl) {
     return next();
   } else {
     return next({
