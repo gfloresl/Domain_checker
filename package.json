@@ -1,12 +1,11 @@
 {
-  "name": "client",
+  "name": "domain_checker",
   "version": "0.1.0",
   "type": "module",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-object-view": "^0.3.4",
     "react-scripts": "5.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -14,10 +13,12 @@
     "nodemon": "^2.0.21"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dev-server": "nodemon server/server.js",
-    "server": "node server/server.js"
+    "start": "npm run react-build && npm run server",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "server-dev": "nodemon server/server.js",
+    "server": "node server/server.js",
+    "dev": "npm run react-build && npm run server-dev"
   },
   "eslintConfig": {
     "extends": [

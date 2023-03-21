@@ -25,7 +25,7 @@ const getContent = ({ propertyKey, propertyValue }) => {
   if (propertyKey === "rawText" || propertyKey === "strippedText") return;
 
   if (Array.isArray(propertyValue)) {
-    return (
+    return propertyValue.length ? (
       <div className="section-container">
         <span className="property-key-container">
           {getPropertyName(propertyKey)}
@@ -39,7 +39,7 @@ const getContent = ({ propertyKey, propertyValue }) => {
           )}
         </ul>
       </div>
-    );
+    ) : null;
   } else if (typeof propertyValue === "object") {
     return (
       <ObjectViewer propertyKey={propertyKey} propertyValue={propertyValue} />

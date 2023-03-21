@@ -11,6 +11,7 @@ button:hover {
 
 ul {
   margin: 0;
+  padding-left: 20px;
 }
 
 li {
@@ -47,6 +48,11 @@ li > .property-key-container {
   width: 400px;
 }
 
+.input-container > input[type="text"]:focus {
+  outline: none;
+  box-shadow: rgb(214, 214, 238) 0 0 5px;
+}
+
 .input-container > button {
   padding: 8px 16px;
   margin-left: 8px;
@@ -59,7 +65,11 @@ li > .property-key-container {
 
 .input-container > button:hover {
   background-color: #52f2b7;
-  color: white;
+}
+
+.input-container > button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .error-message > button {
@@ -85,6 +95,11 @@ li > .property-key-container {
   text-align: center;
 }
 
+.loading {
+  position: relative;
+  text-align: center;
+}
+
 .data-viewer {
   padding: 5px 20px;
   border-radius: 5px;
@@ -105,25 +120,38 @@ li > .property-key-container {
   gap: 10px;
   cursor: pointer;
   color: rgb(13, 150, 3);
+  transition: text-shadow linear 200ms;
 }
 
 .section-key-container:hover {
-  text-shadow: #ffe091 1px 1px 5px;
+  text-shadow: #54cb5e 1px 1px 5px;
+  transition: text-shadow linear 200ms;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
+  .App {
+    padding: 10px;
+  }
+
   .form-container {
     padding: 0;
   }
+
   .input-container {
     display: flex;
     flex-direction: column;
   }
+
   .input-container > input[type="text"] {
     width: 100%;
   }
+
   .input-container > button {
     margin: 20px 0;
     width: 100%;
+  }
+
+  .data-viewer {
+    word-wrap: break-word;
   }
 }

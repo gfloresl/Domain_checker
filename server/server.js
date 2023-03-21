@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/build'));
 
-app.get('/whois/:query', controller.validateQuery, controller.fetchToApi, (req, res)=>{
+app.get('/whois/:domainName', controller.validateQuery, controller.fetchToApi, (req, res) => {
   return res.status(200).json(res.locals.data);
 });
 

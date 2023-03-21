@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { DataViewer } from "./components/index.js";
+import { DataViewer, Spinner } from "./components/index.js";
 import "./App.css";
 
-
 const App = () => {
-  const [query, setQuery] = useState("");
   const [result, setResult] = useState();
   const [errorMsg, setErrorMsg] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const query = event.target[0].value;
     if (!query) return setErrorMsg("Please enter a domain to look up.");
+    await resetCurrentStateUponFetching();
     fetch(`/whois/${query}`)
       .then((response) => {
         if (response.ok) return response.json();
@@ -19,21 +20,23 @@ const App = () => {
         });
       })
       .then((data) => {
-        setErrorMsg("");
         setResult(data.WhoisRecord);
       })
       .catch((error) => {
-        console.error(error);
-        setResult("");
         setErrorMsg(error.message);
+      })
+      .finally(() => {
+        setIsFetching(false);
       });
   };
 
-  const handleQueryChange = (event) => {
-    setQuery(event.target.value);
+  const resetCurrentStateUponFetching = () => {
+    setIsFetching(true);
+    setErrorMsg("");
+    setResult("");
   };
 
-  const handleRemoveErrorMessage = (event) => {
+  const handleRemoveErrorMessage = () => {
     setErrorMsg("");
   };
 
@@ -42,19 +45,23 @@ const App = () => {
       <form className="form-container" onSubmit={handleSubmit}>
         <label htmlFor="query">Enter a domain or IP address </label>
         <div className="input-container">
-          <input
-            type="text"
-            id="query"
-            placeholder="ex: google.com"
-            value={query}
-            onChange={handleQueryChange}
-          />
-          <button type="submit">Lookup</button>
+          <input type="text" id="query" placeholder="ex: google.com" />
+          <button type="submit" disabled={isFetching}>
+            Lookup
+          </button>
         </div>
       </form>
       {errorMsg && (
         <div className="error-message">
-          {errorMsg} <button onClick={handleRemoveErrorMessage}>x</button>
+          {errorMsg}
+          <button onClick={handleRemoveErrorMessage} disabled={isFetching}>
+            x
+          </button>
+        </div>
+      )}
+      {isFetching && (
+        <div className="loading">
+          <Spinner />
         </div>
       )}
       {result && <DataViewer data={result} />}
@@ -63,4 +70,3 @@ const App = () => {
 };
 
 export default App;
-
